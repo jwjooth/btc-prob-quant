@@ -1,0 +1,75 @@
+{
+  "data": {
+    "raw_path": "/raw_data/bitcoin_historical_data.csv",
+    "processed_path": "artifacts/data/processed_btc_data.parquet"
+  },
+  "features": {
+    "target_horizons_days": [
+      180,
+      365
+    ],
+    "log_return_lags": [
+      1,
+      3,
+      7,
+      30,
+      90
+    ],
+    "volatility_windows": [
+      30,
+      90,
+      365
+    ],
+    "rolling_stat_windows": [
+      30,
+      90,
+      365
+    ]
+  },
+  "training": {
+    "test_split_date": "2020-01-01",
+    "quantiles": [
+      0.05,
+      0.25,
+      0.5,
+      0.75,
+      0.95
+    ],
+    "optuna_trials": 50
+  },
+  "models": {
+    "lgbm_quantile": {
+      "objective": "quantile",
+      "metric": "quantile",
+      "n_jobs": -1,
+      "verbose": -1,
+      "learning_rate": 0.0652751029030017,
+      "num_leaves": 22,
+      "min_data_in_leaf": 66,
+      "n_estimators": 1200,
+      "lambda_l1": 2.3960992043840705e-06,
+      "lambda_l2": 0.0687422022382899
+    },
+    "bayesian_lstm": {
+      "input_seq_len": 90,
+      "hidden_size": 64,
+      "num_layers": 2,
+      "dropout": 0.3,
+      "epochs": 30,
+      "batch_size": 64,
+      "lr": 0.001,
+      "mc_samples": 100
+    },
+    "gp_baseline": {
+      "n_restarts_optimizer": 10
+    }
+  },
+  "backtest": {
+    "train_window_days": 1095,
+    "test_window_days": 180,
+    "step_days": 90,
+    "start_date": "2017-01-01",
+    "transaction_cost_pct": 0.001,
+    "slippage_pct": 0.0005
+  }
+}

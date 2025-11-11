@@ -1,0 +1,8 @@
+{
+    "learning_rate": 0.08624936357166238,
+    "num_leaves": 180,
+    "min_data_in_leaf": 36,
+    "n_estimators": 1500,
+    "lambda_l1": 9.21627706565998,
+    "lambda_l2": 9.72354662223484e-05
+}
